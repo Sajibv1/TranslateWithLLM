@@ -31,7 +31,19 @@ exports.handler = async (event, context) => {
             'bn': 'Bengali',
             'en': 'English',
             'ar': 'Arabic',
-            'hi': 'Hindi'
+            'hi': 'Hindi',
+            'es': 'Spanish',
+            'fr': 'French',
+            'de': 'German',
+            'zh': 'Chinese (Simplified)',
+            'ja': 'Japanese',
+            'at': 'Western Punjabi',
+            'ru': 'Russian',
+            'pt': 'Portuguese',
+            'it': 'Italian',
+            'ko': 'Korean',
+            'tr': 'Turkish',
+            'vi': 'Vietnamese'
         };
 
         const sourceLanguage = languageMap[fromLang] || fromLang;

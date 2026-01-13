@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Language Translator</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
-    
+
     <style>
         /* Updated theme: modern dark glassmorphism (purple -> white) */
         :root {
             --bg-deep: #000000;
-            --grid-color: rgba(255,255,255,0.03);
-            --card-bg: rgba(255,255,255,0.04);
-            --card-border: rgba(255,255,255,0.06);
+            --grid-color: rgba(255, 255, 255, 0.03);
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --card-border: rgba(255, 255, 255, 0.06);
             --primary-gradient: linear-gradient(135deg, #ffffff, #e6e6e6);
             --accent-glow: rgba(255, 255, 255, 0.30);
             --text-main: #ffffff;
             --text-muted: #9ca3af;
             --radius: 16px;
-            --bg-input: rgba(255,255,255,0.02);
-            --border-subtle: rgba(255,255,255,0.06);
+            --bg-input: rgba(255, 255, 255, 0.02);
+            --border-subtle: rgba(255, 255, 255, 0.06);
         }
 
         * {
@@ -35,15 +36,16 @@
             padding: 0;
             min-height: 100vh;
             display: flex;
-            flex-direction: column; /* Changed for mobile stacking */
+            flex-direction: column;
+            /* Changed for mobile stacking */
             align-items: center;
             justify-content: center;
 
             background-image:
                 linear-gradient(90deg, var(--grid-color) 1px, transparent 1px),
                 linear-gradient(0deg, var(--grid-color) 1px, transparent 1px),
-                radial-gradient(circle at 15% 10%, rgba(255,255,255,0.04) 0%, transparent 40%),
-                radial-gradient(circle at 85% 90%, rgba(255,255,255,0.02) 0%, transparent 40%);
+                radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 85% 90%, rgba(255, 255, 255, 0.02) 0%, transparent 40%);
             background-size: 28px 28px, 28px 28px, cover, cover;
         }
 
@@ -66,21 +68,23 @@
             font-weight: 500;
             text-decoration: none;
             color: var(--text-muted);
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 30px; /* Pill shape */
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            /* Pill shape */
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .nav-link:hover {
             color: #fff;
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
+
         /* ----------------------------- */
 
         .container {
@@ -89,7 +93,7 @@
             padding: 2rem;
             position: relative;
             z-index: 10;
-            transform: translateY(-10px); 
+            transform: translateY(-10px);
         }
 
         header {
@@ -105,7 +109,7 @@
             background: linear-gradient(to right, #fff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255,255,255,0.1);
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
             color: var(--text-main);
         }
 
@@ -123,7 +127,7 @@
             -webkit-backdrop-filter: blur(14px);
             border: 1px solid var(--card-border);
             border-radius: var(--radius);
-            box-shadow: 0 8px 30px rgba(2,6,23,0.7);
+            box-shadow: 0 8px 30px rgba(2, 6, 23, 0.7);
             overflow: hidden;
             transition: transform 0.3s ease;
         }
@@ -137,7 +141,8 @@
             gap: 1rem;
         }
 
-        html, body {
+        html,
+        body {
             color-scheme: dark;
         }
 
@@ -156,8 +161,8 @@
             height: 10px;
             pointer-events: none;
             transform: translateY(-40%) rotate(45deg);
-            border-right: 2px solid rgba(255,255,255,0.7);
-            border-bottom: 2px solid rgba(255,255,255,0.7);
+            border-right: 2px solid rgba(255, 255, 255, 0.7);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.7);
             opacity: 0.9;
         }
 
@@ -173,25 +178,27 @@
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.18s ease;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 3px 10px rgba(0,0,0,0.6);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02), 0 3px 10px rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(4px);
             color-scheme: dark;
             background-clip: padding-box;
         }
 
         select:hover {
-            border-color: rgba(255,255,255,0.18);
-            background-color: rgba(255,255,255,0.02);
+            border-color: rgba(255, 255, 255, 0.18);
+            background-color: rgba(255, 255, 255, 0.02);
         }
 
         select:focus {
-            border-color: rgba(255,255,255,0.14);
-            box-shadow: 0 0 0 3px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.02);
+            border-color: rgba(255, 255, 255, 0.14);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.02);
             outline: none;
-            background-color: rgba(255,255,255,0.02);
+            background-color: rgba(255, 255, 255, 0.02);
         }
 
-        select::-ms-expand { display: none; }
+        select::-ms-expand {
+            display: none;
+        }
 
         select option {
             color: #fff;
@@ -237,7 +244,7 @@
 
         .text-area-container:last-child {
             border-right: none;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
         }
 
         .label-row {
@@ -269,19 +276,20 @@
         }
 
         textarea::placeholder {
-            color: rgba(255,255,255,0.2);
+            color: rgba(255, 255, 255, 0.2);
         }
 
         textarea::-webkit-scrollbar {
             width: 6px;
         }
+
         textarea::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 3px;
         }
 
         .copy-btn {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
             border: none;
             color: var(--text-muted);
             padding: 6px 12px;
@@ -295,7 +303,7 @@
         }
 
         .copy-btn:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             color: white;
         }
 
@@ -311,7 +319,7 @@
             align-items: center;
             gap: 1rem;
             border-top: 1px solid var(--border-subtle);
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
         }
 
         .btn {
@@ -334,18 +342,18 @@
 
         .btn-secondary:hover {
             color: white;
-            background: rgba(255,255,255,0.05);
-            border-color: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .btn-primary {
             background: var(--primary-gradient);
             color: #000;
-            box-shadow: 0 4px 20px rgba(255,255,255,0.08);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.08);
         }
 
         .btn-primary:hover {
-            box-shadow: 0 6px 30px rgba(255,255,255,0.12);
+            box-shadow: 0 6px 30px rgba(255, 255, 255, 0.12);
             transform: translateY(-2px);
         }
 
@@ -357,14 +365,18 @@
             display: inline-block;
             width: 1rem;
             height: 1rem;
-            border: 2px solid rgba(255,255,255,.3);
+            border: 2px solid rgba(255, 255, 255, .3);
             border-radius: 50%;
             border-top-color: white;
             animation: spin 1s ease-in-out infinite;
             margin-left: 0.5rem;
         }
 
-        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
         footer {
             text-align: center;
@@ -376,13 +388,37 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .language-selector { flex-direction: column; gap: 1rem; }
-            .swap-btn { transform: rotate(90deg); margin: 0.5rem 0; }
-            .swap-btn:hover { transform: rotate(270deg); }
-            .text-areas { grid-template-columns: 1fr; }
-            .text-area-container { border-right: none; border-bottom: 1px solid var(--border-subtle); min-height: 200px; }
-            .controls { flex-direction: column-reverse; }
-            .btn { width: 100%; }
+            .language-selector {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .swap-btn {
+                transform: rotate(90deg);
+                margin: 0.5rem 0;
+            }
+
+            .swap-btn:hover {
+                transform: rotate(270deg);
+            }
+
+            .text-areas {
+                grid-template-columns: 1fr;
+            }
+
+            .text-area-container {
+                border-right: none;
+                border-bottom: 1px solid var(--border-subtle);
+                min-height: 200px;
+            }
+
+            .controls {
+                flex-direction: column-reverse;
+            }
+
+            .btn {
+                width: 100%;
+            }
 
             /* Mobile Navigation Adjustments */
             .top-nav {
@@ -395,7 +431,7 @@
                 margin-bottom: 0.5rem;
                 padding: 0 1rem;
             }
-            
+
             .nav-link {
                 padding: 8px 14px;
                 font-size: 0.85rem;
@@ -403,6 +439,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="top-nav">
@@ -428,7 +465,8 @@
                 </div>
 
                 <button class="swap-btn" id="swapLanguages" title="Swap languages">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="17 1 21 5 17 9"></polyline>
                         <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
                         <polyline points="7 23 3 19 7 15"></polyline>
@@ -459,7 +497,11 @@
                         <h3>Translation</h3>
                         <button class="copy-btn" id="copyBtn" title="Copy to Clipboard">
                             <span class="icon">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
                             </span>
                             <span class="text">Copy</span>
                         </button>
@@ -473,22 +515,23 @@
                     <button class="btn btn-secondary" id="clearText">Clear</button>
                 </div>
                 <div style="display: flex; gap: 10px; width: 100%; justify-content: flex-end;">
-                     <button class="btn btn-secondary" id="downloadPdf">Download PDF</button>
+                    <button class="btn btn-secondary" id="downloadPdf">Download PDF</button>
                     <button class="btn btn-primary" id="translateBtn">Translate</button>
                 </div>
             </div>
         </div>
-        
+
         <footer>
             <p>Using LLM for high-quality translations that understand context</p>
         </footer>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
         const { jsPDF } = window.jspdf;
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Elements
             const sourceLanguage = document.getElementById('sourceLanguage');
             const targetLanguage = document.getElementById('targetLanguage');
@@ -500,20 +543,63 @@
             const downloadPdfBtn = document.getElementById('downloadPdf');
             const copyBtn = document.getElementById('copyBtn');
 
-            // Language names mapping
-            const languageNames = {
-                'bn': 'Bangla',
-                'en': 'English',
-                'ar': 'Arabic',
-                'hi': 'Hindi'
-            };
+            // Popular languages list
+            const languages = [
+                { code: 'bn', name: 'Bangla' },
+                { code: 'en', name: 'English' },
+                { code: 'ar', name: 'Arabic' },
+                { code: 'hi', name: 'Hindi' },
+                { code: 'es', name: 'Spanish' },
+                { code: 'fr', name: 'French' },
+                { code: 'de', name: 'German' },
+                { code: 'zh', name: 'Chinese (Simplified)' },
+                { code: 'ja', name: 'Japanese' },
+                { code: 'at', name: 'Western Punjabi' },
+                { code: 'ru', name: 'Russian' },
+                { code: 'pt', name: 'Portuguese' },
+                { code: 'it', name: 'Italian' },
+                { code: 'ko', name: 'Korean' },
+                { code: 'tr', name: 'Turkish' },
+                { code: 'vi', name: 'Vietnamese' }
+            ];
+
+            // Populate language dropdowns
+            function populateLanguages() {
+                const createOption = (lang) => {
+                    const option = document.createElement('option');
+                    option.value = lang.code;
+                    option.textContent = lang.name;
+                    return option;
+                };
+
+                // Clear existing options except defaults if any (we are replacing all)
+                sourceLanguage.innerHTML = '';
+                targetLanguage.innerHTML = '';
+
+                languages.forEach(lang => {
+                    sourceLanguage.appendChild(createOption(lang));
+                    targetLanguage.appendChild(createOption(lang));
+                });
+
+                // Set defaults
+                sourceLanguage.value = 'en';
+                targetLanguage.value = 'bn';
+            }
+
+            populateLanguages();
+
+            // Language names mapping for quick lookup
+            const languageNames = languages.reduce((acc, lang) => {
+                acc[lang.code] = lang.name;
+                return acc;
+            }, {});
 
             // Swap Logic
-            swapBtn.addEventListener('click', function() {
+            swapBtn.addEventListener('click', function () {
                 const temp = sourceLanguage.value;
                 sourceLanguage.value = targetLanguage.value;
                 targetLanguage.value = temp;
-                
+
                 // Also swap text if there's content
                 if (sourceText.value || targetText.value) {
                     const tempText = sourceText.value;
@@ -524,11 +610,11 @@
 
             // Copy to Clipboard Logic
             copyBtn.addEventListener('click', () => {
-                if(!targetText.value) return;
+                if (!targetText.value) return;
 
                 navigator.clipboard.writeText(targetText.value).then(() => {
                     const originalHtml = copyBtn.innerHTML;
-                    
+
                     // Change style to indicate success
                     copyBtn.classList.add('success');
                     copyBtn.innerHTML = `
@@ -547,14 +633,14 @@
             });
 
             // Clear Text
-            clearBtn.addEventListener('click', function() {
+            clearBtn.addEventListener('click', function () {
                 sourceText.value = '';
                 targetText.value = '';
                 sourceText.focus();
             });
 
             // Translate Text
-            translateBtn.addEventListener('click', async function() {
+            translateBtn.addEventListener('click', async function () {
                 const text = sourceText.value.trim();
                 if (!text) {
                     alert('Please enter text to translate');
@@ -586,7 +672,7 @@
             });
 
             // Download PDF
-            downloadPdfBtn.addEventListener('click', function() {
+            downloadPdfBtn.addEventListener('click', async function () {
                 if (!targetText.value.trim()) {
                     alert('No translation to download');
                     return;
@@ -594,31 +680,73 @@
 
                 const fromLang = languageNames[sourceLanguage.value];
                 const toLang = languageNames[targetLanguage.value];
-                
-                const doc = new jsPDF();
-                
-                // Add title
-                doc.setFontSize(18);
-                doc.text(`Translation from ${fromLang} to ${toLang}`, 10, 15);
-                
-                // Add original text
-                doc.setFontSize(12);
-                doc.text(`Original Text (${fromLang}):`, 10, 30);
-                doc.text(sourceText.value, 10, 40, { maxWidth: 180 });
-                
-                // Add translation
-                let yPos = 80;
-                try {
-                    if (doc.autoTable && doc.autoTable.previous) {
-                         yPos = doc.autoTable.previous.finalY + 15;
-                    }
-                } catch(e) {}
 
-                doc.text(`Translation (${toLang}):`, 10, yPos);
-                doc.text(targetText.value, 10, yPos + 10, { maxWidth: 180 });
-                
-                // Save the PDF
-                doc.save(`translation_${fromLang}_to_${toLang}.pdf`);
+                // Create a temporary container for PDF generation
+                // This ensures we can capture the text with correct styling/fonts
+                const container = document.createElement('div');
+                container.style.padding = '40px';
+                container.style.width = '600px';
+                container.style.color = '#000';
+                container.style.background = '#fff';
+                container.style.fontFamily = 'Arial, sans-serif';
+
+                // Add content to the container
+                container.innerHTML = `
+                    <h1 style="font-size: 24px; margin-bottom: 20px; border-bottom: 2px solid #333; padding-bottom: 10px;">Translation</h1>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="color: #555; font-size: 16px;">From ${fromLang}:</h3>
+                        <p style="font-size: 14px; line-height: 1.6; white-space: pre-wrap;">${sourceText.value}</p>
+                    </div>
+                    
+                    <div>
+                        <h3 style="color: #555; font-size: 16px;">To ${toLang}:</h3>
+                        <p style="font-size: 14px; line-height: 1.6; white-space: pre-wrap;">${targetText.value}</p>
+                    </div>
+                    
+                    <div style="margin-top: 40px; font-size: 10px; color: #999; text-align: center;">
+                        Generated by AI Language Translator
+                    </div>
+                `;
+
+                // Position off-screen
+                container.style.position = 'fixed';
+                container.style.left = '-9999px';
+                container.style.top = '0';
+                document.body.appendChild(container);
+
+                try {
+                    translateBtn.disabled = true; // Disable buttons during generation
+                    downloadPdfBtn.textContent = "Generating PDF...";
+
+                    const canvas = await html2canvas(container, {
+                        scale: 2, // Higher quality
+                        useCORS: true,
+                        logging: false
+                    });
+
+                    const imgData = canvas.toDataURL('image/png');
+                    const doc = new jsPDF({
+                        orientation: 'p',
+                        unit: 'mm',
+                        format: 'a4'
+                    });
+
+                    const imgProps = doc.getImageProperties(imgData);
+                    const pdfWidth = doc.internal.pageSize.getWidth();
+                    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+                    doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                    doc.save(`translation_${sourceLanguage.value}_to_${targetLanguage.value}.pdf`);
+
+                } catch (error) {
+                    console.error("PDF generation failed:", error);
+                    alert("Failed to generate PDF. Please try again.");
+                } finally {
+                    document.body.removeChild(container);
+                    translateBtn.disabled = false;
+                    downloadPdfBtn.textContent = "Download PDF";
+                }
             });
 
             // Function to call the Netlify function for translation
@@ -645,4 +773,5 @@
         });
     </script>
 </body>
+
 </html>
