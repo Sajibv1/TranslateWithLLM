@@ -735,8 +735,23 @@
                     const imgProps = doc.getImageProperties(imgData);
                     const pdfWidth = doc.internal.pageSize.getWidth();
                     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                    const pageHeight = doc.internal.pageSize.getHeight();
 
-                    doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                    let heightLeft = pdfHeight;
+                    let position = 0;
+
+                    // Add first page
+                    doc.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+                    heightLeft -= pageHeight;
+
+                    // Add subsequent pages if needed
+                    while (heightLeft > 0) {
+                        position = heightLeft - pdfHeight; // Negative position to shift image up
+                        doc.addPage();
+                        doc.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+                        heightLeft -= pageHeight;
+                    }
+
                     doc.save(`translation_${sourceLanguage.value}_to_${targetLanguage.value}.pdf`);
 
                 } catch (error) {
