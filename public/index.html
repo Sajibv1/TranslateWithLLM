@@ -96,6 +96,18 @@
             transform: translateY(-10px);
         }
 
+        nav {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
         header {
             text-align: center;
             margin-bottom: 2.5rem;
@@ -449,6 +461,9 @@
 
     <div class="container">
         <header>
+            <nav>
+                <a href="/index.html">Translator</a> | <a href="/quiz.html">Quiz Generator</a>
+            </nav>
             <h1>AI Language Translator</h1>
             <p class="description">Powered by LLM for accurate multilingual translations</p>
         </header>
